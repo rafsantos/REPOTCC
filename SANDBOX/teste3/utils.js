@@ -1,5 +1,3 @@
-var canvas1 = document.getElementById("canvas1");
-var canvas2 = document.getElementById("canvas2");
 
 function RafImage(width, height){
 	// properties
@@ -58,7 +56,6 @@ RafImage.prototype.getA = function(x,y){
 	return this.imageData.data[start+3];
 };
 
-
 RafImage.prototype.setAlphaComponent = function(x,y, alpha){
 	var start = ((y*this.getWidth())+x)*4; 
 	this.imageData.data[start+3] = alpha;
@@ -79,7 +76,6 @@ RafImage.prototype.getB = function(x,y){
 	return this.imageData.data[start+2];
 };
 
-
 RafImage.prototype.getColor = function(x,y){
 	var start = ((y*this.getWidth())+x)*4;
 	
@@ -90,7 +86,6 @@ RafImage.prototype.getColor = function(x,y){
 			(this.imageData.data[start+2]);
 };
 
-
 RafImage.prototype.setBinaryColor = function(x,y,value){
 	var pos = ((y*this.getWidth())+x);
 	this.arrBinaryColor[pos] = value;
@@ -100,7 +95,6 @@ RafImage.prototype.getBinaryColor = function(x,y){
 	var pos = ((y*this.getWidth())+x);
 	return this.arrBinaryColor[pos];
 };
-
 
 RafImage.prototype.setIntColor = function(x,y, alpha, r, g, b){
 	var start = ((y*this.getWidth())+x)*4;
@@ -118,53 +112,8 @@ RafImage.prototype.getHeight = function(){
 	return this.height;
 };
 
-
 RafImage.prototype.draw = function(canvas, x, y, alphaCombination){
 	if(x == null){x=0;}
 	if(y == null){y=0;}
 	canvas.getContext("2d").putImageData(this.imageData, x,y);
 };
-	
-
-//////////////////////////////////////////////////
-
-image = new RafImage();
-
-image.load("lena.png", imageLoaded);
-
-function imageLoaded(){
-imageOut = image.clone()
-image.draw(canvas1)
-//Marvin.grayScale(image, imageOut);
-
-
-for( let y = 0; y < image.height; y++) {
-  for (let x = 0; x < image.width; x++) {
-
-    //Red - 30% / Green - 59% / Blue - 11%
-    /*
-    r = image.getIntComponent0(x, y);
-    g = image.getG(x, y);
-    b = image.getB(x, y);
-    finalColor = Math.ceil((r*0.3)+(g*0.59)+(b*0.11));
-    imageOut.setIntColor(x,y,image.getA(x, y), finalColor,finalColor,finalColor);
-    */
-   var lim = 50
-    image.getR(x,y) > lim ? r = 255 : r = image.getR(x,y);
-    image.getG(x,y) > lim ? g = 255 : g = image.getG(x,y);
-    image.getB(x,y) > lim ? b = 255 : b = image.getB(x,y);
-    
-    //imageOut.imageData.data[(x + 200*y)*4 +1] = 0;
-    //imageOut.imageData.data[(x + 200*y)*4 +2] = 255;
-    //imageOut.imageData.data[(x + 200*y)*4 +3] = 255;
-    imageOut.setIntColor(x,y,255,r,g,b);
-  }
-}
-
-console.log(imageOut.imageData)
-canvas2.getContext("2d").putImageData(imageOut.imageData, 0,0);
-//imageOut.draw(canvas2)
-}
-
-
-
