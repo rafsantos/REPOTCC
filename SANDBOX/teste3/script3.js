@@ -6,41 +6,60 @@ var canvas2 = document.getElementById("canvas2");
 
 image = new RafImage();
 
-image.load("lena.png", imageLoaded);
+image.load("kitten3.jpg", imageLoaded);
 
 function imageLoaded(){
+	console.log(image)
 imageOut = image.clone()
 image.draw(canvas1)
 
-var kernel = [1/9  , 1/9  , 1/9 ,
-			  1/9  , 1/9  , 1/9 ,
-			  1/9  , 1/9  , 1/9 ];
+var kernel = [-1  , 0  , 1 , 
+			  -1  , 0  , 1 , 
+			  -1  , 
+			  0  , 1 ];
 
+//Tenho que normalizar o Kernel para preservar brilho da imagem
+//Normalizando Kernel (soma dos elementos = 1)
+//Se a soma dos elementos é 0, retorno
+let soma = kernel.reduce((b,c) => b+c) == 0 ? 1 : kernel.reduce((b,c) => b+c)
+kernel = kernel.map(a => (a/soma))
+console.log(kernel)
 let dim = Math.sqrt(kernel.length);
+const pad = Math.floor(dim/2);
 
-for (let y = 0; y < image.height; y++) {
-  for (let x = 0; x < image.width; x++) {
+const pixels = image.imageData.data;
+const width = image.width;
+const height= image.height;
 
-	var r = 0;
-	var g = 0;
-	var b = 0;
+let pix, i, r, g, b;
+const w = width;
+const h = height;
+const cw = w + pad * 2; // add padding
+const ch = h + pad * 2;
 
-	for (let ky = 0; ky < dim ; ky ++){
-		for (let kx = 0; kx < dim ; kx ++){
+for (let y = pad; y < image.height-pad; y++) {
+  for (let x = pad; x < image.width-pad; x++) {
+
+	r = 0;
+	g = 0;
+	b = 0;
+
+	for (let ky = -pad; ky <= pad ; ky ++){
+		for (let kx = -pad; kx <= pad ; kx ++){
 			
-			i = (ky) * dim + (kx); //kernel
-
-			r = r + image.getR(x+i,y+i) * kernel[i]
-			g = g + image.getG(x+i,y+i) * kernel[i]
-			b = b + image.getB(x+i,y+i) * kernel[i]			
+			i = (ky+pad) * dim + (kx+pad); //kernel
+					
+            r += image.getR( x+kx , y+ky )  * kernel[i] ;
+            g += image.getG( x+kx , y+ky )  * kernel[i] ;
+            b += image.getB( x+kx , y+ky )  * kernel[i] ;
 
 		}
 	}
+
 	imageOut.setIntColor(x,y,255,r,g,b);
   }
 }
 
-console.log(imageOut.imageData)
 imageOut.draw(canvas2)
 //imageOut.draw(canvas2)
 }
