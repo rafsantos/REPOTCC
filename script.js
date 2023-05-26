@@ -8,7 +8,7 @@ var canvas2 = document.getElementById("canvas2");
 if (kernel == null)
 	var kernel = new Kernel();
 var table = document.getElementById("tblKer");
-updateTable(kernel,table)
+updateTable(kernel, table)
 
 // Imagem inicial padrão da página
 image = new RafImage();
@@ -17,8 +17,8 @@ function atualizaImagem() {
 	canvas1.width = image.width;
 	canvas1.height = image.height;
 	image.draw(canvas1)
-	
-	processar(image,kernel.kernel);
+
+	processar(image, kernel.kernel);
 
 	canvas2.width = imageOut.width;
 	canvas2.height = imageOut.height;
@@ -42,7 +42,7 @@ function handleFiles() {
 
 /////////////////////////////////////////////////
 ///Tabela com o kernel
-function updateTable(kernel,table) {
+function updateTable(kernel, table) {
 
 	var tbl = "<tbody>"
 	for (let ky = 0; ky < Math.sqrt(kernel.length); ky++) {
@@ -70,23 +70,27 @@ function frmIn() {
 
 /////////////////////////////////
 // Aumentar Kernel entrada
-function aumentarKer(){
+function aumentarKer() {
 	var tbl = document.getElementById("kerInTbl");
 	//Insere uma nova coluna ao final de cada linha
-		for (row of tbl.rows){
-		row.insertCell(row.length);
+	for (row of tbl.rows) {
+		var input = document.createElement("input");
+		input.setAttribute('type', 'text');
+		input.setAttribute('size', '3');
+		input.setAttribute('name', 'kerInCell');
+		var cell = row.insertCell(row.length);
+		cell.appendChild(input);
 	}
 	//Aumenta uma nova linha
 	// Insere uma linha ao final da tabela
 	row = tbl.insertRow(tbl.rows.length)
-	n =  tbl.rows.length
-	for (i = 0 ; i < n ; i++){
-		tbl.rows[n-1].insertCell(i);
+	n = tbl.rows.length
+	for (i = 0; i < n; i++) {
+		var input = document.createElement("input");
+		input.setAttribute('type', 'text');
+		input.setAttribute('size', '3');
+		input.setAttribute('name', 'kerInCell');
+		var cell = tbl.rows[n - 1].insertCell(i);
+		cell.appendChild(input);
 	}
-	
-	
-
-
-// Append a text node to the cell
-newCell.appendChild('teste');
 }
