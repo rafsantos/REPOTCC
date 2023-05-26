@@ -1,38 +1,44 @@
+///////////////////////////////////////////////
+///// Script de controle da página
+//////////////////////////////////////////////
+// Inicialização
+
 var canvas1 = document.getElementById("canvas1");
 var canvas2 = document.getElementById("canvas2");
 if (kernel == null)
 	var kernel = new Kernel();
 var table = document.getElementById("tblKer");
 updateTable(kernel,table)
-//////////////////////////////////////////////////
 
+// Imagem inicial padrão da página
+image = new RafImage();
+image.load("gato.jpg", atualizaImagem);
+function atualizaImagem() {
+	canvas1.width = image.width;
+	canvas1.height = image.height;
+	image.draw(canvas1)
+	
+	processar(image,kernel.kernel);
+
+	canvas2.width = imageOut.width;
+	canvas2.height = imageOut.height;
+	canvas3.width = imageOut.width;
+	canvas3.height = imageOut.height;
+	imageOut.draw(canvas2)
+
+	imagePeB = imageOut.clone().peb;
+	imagePeB = imageOut.peb(imageOut);
+	imagePeB.draw(canvas3);
+}
+
+
+// Botão para enviar imagem customizada
 const inputElement = document.getElementById("image");
 inputElement.addEventListener("change", handleFiles, false);
 function handleFiles() {
-	//const fileList = this.files; /* now you can work with the file list */
 	console.log(this.files[0]);
-	image.load(window.URL.createObjectURL(this.files[0]), imageLoaded);
+	image.load(window.URL.createObjectURL(this.files[0]), atualizaImagem);
 }
-
-
-
-
-//////////////////////////////////////////
-
-/////////////////
-image = new RafImage();
-image.load("gato.jpg", imageLoaded);
-console.log(image)
-
-
-
-function imageLoaded() {
-	processar();
-}
-
-
-
-
 
 /////////////////////////////////////////////////
 ///Tabela com o kernel
@@ -41,7 +47,6 @@ function updateTable(kernel,table) {
 	var tbl = "<tbody>"
 	for (let ky = 0; ky < Math.sqrt(kernel.length); ky++) {
 		tbl += "<tr>"  //criar nova linha
-		console.log(tbl)
 		for (let kx = 0; kx < Math.sqrt(kernel.length); kx++) {
 			tbl += "<td>" + kernel.kernel[ky * kernel.dim + kx] + "</td>" //cada celula da linha
 		}
@@ -65,13 +70,23 @@ function frmIn() {
 
 /////////////////////////////////
 // Aumentar Kernel entrada
-function aumentarKernel(){
-	var tbodyRef = document.getElementById("kernelInTbl").getElementsByTagName('tbody')[0];
-	// Insert a row at the end of table
-var newRow = tbodyRef.insertRow();
-// Insert a cell at the end of the row
-var newCell = newRow.insertCell();
+function aumentarKer(){
+	var tbl = document.getElementById("kerInTbl");
+	//Insere uma nova coluna ao final de cada linha
+		for (row of tbl.rows){
+		row.insertCell(row.length);
+	}
+	//Aumenta uma nova linha
+	// Insere uma linha ao final da tabela
+	row = tbl.insertRow(tbl.rows.length)
+	n =  tbl.rows.length
+	for (i = 0 ; i < n ; i++){
+		tbl.rows[n-1].insertCell(i);
+	}
+	
+	
+
 
 // Append a text node to the cell
-newCell.appendChild();
+newCell.appendChild('teste');
 }
