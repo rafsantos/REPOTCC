@@ -196,13 +196,17 @@ function Kernel(ker) {
 }
 
 // Processar imagem com um Kernel
-function processar(image, kernel) {
+function processar() {
 
 	var ker = kernel.kernel;
 	var dim = kernel.dim;
 
+	console.log(image)
 	imageOut = image.clone()
 
+	canvas1.width = image.width;
+	canvas1.height = image.height;
+	image.draw(canvas1)
 	const pad = Math.floor(dim / 2);
 	const cw = image.width + pad * 2; // add padding
 	const ch = image.height + pad * 2;
@@ -229,8 +233,12 @@ function processar(image, kernel) {
 			imageOut.setIntColor(x, y, 255, r, g, b);
 		}
 	}
+	canvas2.width = imageOut.width;
+	canvas2.height = imageOut.height;
+	imageOut.draw(canvas2)
 
-	return imageOut
-
+	imagePeB = imageOut.clone();
+	imagePeB = imageOut.peb(imageOut);
+	imagePeB.draw(canvas3);
 
 }
