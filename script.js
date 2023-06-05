@@ -79,6 +79,7 @@ function energia(imagem) {
 		}
 	}
 	console.log(EnergiaTotal.reduce(function (p, v) { return (p > v ? p : v) }));
+	console.log(EnergiaTotal)
 
 
 };
