@@ -1,77 +1,51 @@
-var canvas1 = document.getElementById("canvas1");
-var canvas2 = document.getElementById("canvas2");
-if (kernel == null)
-	var kernel = new Kernel();
-var table = document.getElementById("tblKer");
-updateTable(kernel,table)
-//////////////////////////////////////////////////
+// Processar imagem com um Kernel
+ function convolucao(image, ker) {
+	var ker = ker.kernel;
+	var dim = Math.sqrt(ker.length);
+	imageOut = image.clone()
+	const pad = Math.floor(dim / 2);
+	//const cw = image.width + pad * 2; // add padding
+	//const ch = image.height + pad * 2;
 
-const inputElement = document.getElementById("image");
-inputElement.addEventListener("change", handleFiles, false);
-function handleFiles() {
-	//const fileList = this.files; /* now you can work with the file list */
-	console.log(this.files[0]);
-	image.load(window.URL.createObjectURL(this.files[0]), imageLoaded);
-}
+	for (let y = pad; y < image.height - pad; y++) {
+		for (let x = pad; x < image.width - pad; x++) {
 
+			r = 0;
+			g = 0;
+			b = 0;
 
+			for (let ky = -pad; ky <= pad; ky++) {
+				for (let kx = -pad; kx <= pad; kx++) {
 
+					i = (ky + pad) * dim + (kx + pad); //kernel
 
-//////////////////////////////////////////
+					r += image.getR(x + kx, y + ky) * ker[i];
+					g += image.getG(x + kx, y + ky) * ker[i];
+					b += image.getB(x + kx, y + ky) * ker[i];
 
-/////////////////
-image = new RafImage();
-image.load("gato.jpg", imageLoaded);
-console.log(image)
+				}
+			}
 
-
-
-function imageLoaded() {
-	processar();
-}
-
-
-
-
-
-/////////////////////////////////////////////////
-///Tabela com o kernel
-function updateTable(kernel,table) {
-
-	var tbl = "<tbody>"
-	for (let ky = 0; ky < Math.sqrt(kernel.length); ky++) {
-		tbl += "<tr>"  //criar nova linha
-		console.log(tbl)
-		for (let kx = 0; kx < Math.sqrt(kernel.length); kx++) {
-			tbl += "<td>" + kernel.kernel[ky * kernel.dim + kx] + "</td>" //cada celula da linha
+			imageOut.setIntColor(x, y, 255, r, g, b);
 		}
-		tbl += "</tr>" //fecha cada linha
 	}
-	tbl += "</tbody>"
-	table.innerHTML = tbl
-}
+	return imageOut;
+};
 
-/////////////////////////////////
-// Lendo os valores para um Kernel novo de entrada
-function frmIn() {
-	let kernVals = document.getElementsByName("kerInCell");
-	console.log(kernVals)
-	var newKernel = []
-	for (kernVal of kernVals) {
-		(isNaN(kernVal.value) || !kernVal.value) ? newKernel.push(0) : newKernel.push(parseInt(kernVal.value));
+// Transformar imagem em Preto e Branco
+
+ function pretoeBranco(image) {
+	imageOut = image.clone()
+
+	for (let y = 0; y < image.height; y++) {
+		for (let x = 0; x < image.width; x++) {
+			//Red - 30% / Green - 59% / Blue - 11%
+			r = image.getR(x, y);
+			g = image.getG(x, y);
+			b = image.getB(x, y);
+			peb = Math.ceil((r * 0.3) + (g * 0.59) + (b * 0.11));
+			imageOut.setIntColor(x, y, 255, peb, peb, peb);
+		}
 	}
-	kernel = new Kernel(newKernel);
-}
-
-/////////////////////////////////
-// Aumentar Kernel entrada
-function aumentarKernel(){
-	var tbodyRef = document.getElementById("kernelInTbl").getElementsByTagName('tbody')[0];
-	// Insert a row at the end of table
-var newRow = tbodyRef.insertRow();
-// Insert a cell at the end of the row
-var newCell = newRow.insertCell();
-
-// Append a text node to the cell
-newCell.appendChild();
-}
+	return imageOut;
+};

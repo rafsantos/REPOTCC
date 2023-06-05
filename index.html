@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
   <title>Rafael L Santos TCC - Unirio</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./lib/style.css">
  
 
 </head>
@@ -53,15 +53,14 @@
     <label for="image">Enviar uma imagem:</label>
     <input type="file" id="image" name="image" accept="image/png, image/jpeg">
   </div> <br>
-  <div>
-    <input type="button" value="Processar" onclick="return processar();">
-  </div> <br>
+  
   <canvas id="canvas1" width="1000" , height="1000" style="border:1px solid #000;"></canvas>
   <canvas id="canvas2" width="1000" , height="1000" style="border:1px solid #000;"></canvas>
   <canvas id="canvas3" width="1000" , height="1000" style="border:1px solid #000;"></canvas>
 </body>
 
-<script src="utils.js"></script>
+<script src="./lib/utils.js"></script>
 <script src="script.js"></script>
+<script src="./lib/control.js"></script>
 
 </html>
