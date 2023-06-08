@@ -45,41 +45,31 @@ function pretoeBranco(image) {
 function energia(imagem) {
 	// Populate the first row of the map by just copying the energies
 	// from the energy map.
-	energiaMapa = imagem.imageData.data;
 	var w = imagem.width;
 	var h = imagem.height
-	console.log(imagem)
-	//Primeira linha eu repito a energia total
-	var EnergiaTotal = new Array(h * w).fill(0);
-	console.log(EnergiaTotal)
-	for (let x = 0; x < w; x++) {
-		EnergiaTotal[x] = energiaMapa[4 * x]
-	}
+	var energiaMapa = imagem.getArrayR()
+	var energiaTotal = new Array(h * w).fill(0);
 
-	// Seguindo para as demais linhas
 	//Para cada linha, a partir da segunda, até altura total da imagem
 	for (let y = 1; y < h; y++) {
 		//EM cada linha vou varrer todas as colunas
 		for (let x = 0; x < w; x++) {
 			// Vou agora encontrar a celula acima e adjacente com menor energia.
 			//Inicializo variaveis auxiliares
-			var minPrevEnergy = Infinity;
+			var minPrevEnergy = 1000000;
 			var minPrevX = x;
 			// Indice i vai de -1 a +1. Só celulars adjacentes
 			for (let i = (x - 1); i <= (x + 1); i++) {
-				// Vejo se i leva a celulas dentro da imagem. 
-				if (i >= 0 && i < w && energiaMapa[ (x*(y-1) + x + i) * 4] < minPrevEnergy) {
-					minPrevEnergy = energiaMapa[ (x*(y-1) + x + i) * 4];
-					minPrevX = i;
+				if (i >= 0 && i < w && energiaMapa[x + (y - 1) * w] < minPrevEnergy) {
+					minPrevEnergy = energiaMapa[x + (y - 1) * w];
 				}
 			}
-
 			// Grava a Energia da Celula
-			EnergiaTotal[y * w + x] += minPrevEnergy
 		}
 	}
-	console.log(EnergiaTotal.reduce(function (p, v) { return (p > v ? p : v) }));
-	console.log(EnergiaTotal)
-
-
+	console.log(energiaTotal.reduce(function (p, v) { return (p > v ? p : v) }));
+	//console.log("w = " + w + " ; h = " + h)
+	//console.log(energiaMapa)
+	//console.log(energiaTotal)
+	return (energiaTotal)
 };
