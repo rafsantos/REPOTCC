@@ -1,28 +1,36 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+  <title>Rafael L Santos TCC - Unirio</title>
+  <link rel="stylesheet" href="style.css">
+ 
+
 </head>
 
 <body>
 
-  <form id="form" onsubmit="formIn()">
-    <table id="kernelIn">
-      <tbody>
+  <form id="frmIn" onsubmit="frmIn()">
+    <table id="kerInTbl" class="kerTbl">
+      <tbody >
         <tr>
-          <td><input type="text" size="3" name="kernelIn" value=""></td>
-          <td><input type="text" size="3" name="kernelIn" value=""></td>
-          <td><input type="text" size="3" name="kernelIn" value=""></td>
+          <td><input type="text" size="3" name="kerInCell" value=""></td>
+          <td><input type="text" size="3" name="kerInCell" value=""></td>
+          <td><input type="text" size="3" name="kerInCell" value=""></td>
         </tr>
         <tr>
-          <td><input type="text" size="3" name="kernelIn" value=""></td>
-          <td><input type="text" size="3" name="kernelIn" value=""></td>
-          <td><input type="text" size="3" name="kernelIn" value=""></td>
+          <td><input type="text" size="3" name="kerInCell" value=""></td>
+          <td><input type="text" size="3" name="kerInCell" value=""></td>
+          <td><input type="text" size="3" name="kerInCell" value=""></td>
         </tr>
         <tr>
-          <td><input type="text" size="3" name="kernelIn" value=""></td>
-          <td><input type="text" size="3" name="kernelIn" value=""></td>
-          <td><input type="text" size="3" name="kernelIn" value=""></td>
+          <td><input type="text" size="3" name="kerInCell" value=""></td>
+          <td><input type="text" size="3" name="kerInCell" value=""></td>
+          <td><input type="text" size="3" name="kerInCell" value=""></td>
         </tr>
       </tbody>
       
@@ -30,14 +38,15 @@
 
     </table>
     <br>
-    <input type="button" value="Enviar" onclick="return formIn();">
+    <input type="button" value="Enviar" onclick="return frmIn();">
   </form> 
 
   <br>
+  <input type="button" value="+ kernel" onclick="return aumentarKer();">
   <br>
   <div>
     Kernel para convolução
-    <table id="tabela">
+    <table id="tblKer">
     </table>
   </div>
   <div>
@@ -49,8 +58,10 @@
   </div> <br>
   <canvas id="canvas1" width="1000" , height="1000" style="border:1px solid #000;"></canvas>
   <canvas id="canvas2" width="1000" , height="1000" style="border:1px solid #000;"></canvas>
-  <script src="utils.js"></script>
-  <script src="script.js"></script>
+  <canvas id="canvas3" width="1000" , height="1000" style="border:1px solid #000;"></canvas>
 </body>
+
+<script src="utils.js"></script>
+<script src="script.js"></script>
 
 </html>
