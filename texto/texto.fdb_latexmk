@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1687730422 "/Users/rafaellourencodossantos/Dev/REPOTCC/texto/texto.tex" "texto.pdf" "texto" 1687730425 2
-  "/Users/rafaellourencodossantos/Dev/REPOTCC/texto/texto.tex" 1687730414 829 3bc7fd454c3cf8bf5c5d9d6775e2a763 ""
+["pdflatex"] 1688224666 "/Users/rafaellourencodossantos/Dev/REPOTCC/texto/texto.tex" "texto.pdf" "texto" 1688224668 2
+  "/Users/rafaellourencodossantos/Dev/REPOTCC/texto/texto.tex" 1688224662 2799 fe4363efa2b09ad726a28292d0993652 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm" 1136768653 1524 4414a8315f39513458b80dfc63bff03a ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm" 1136768653 1512 f21f83efb36853c0b70002322c1ab3ad ""
@@ -80,8 +80,8 @@
   "/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1687699981 4623355 b8cad38412faebe1ce5b780a45db67bd ""
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1687699956 7883453 a6d6d18836277eefa1cd01b7054f058f ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
-  "texto.aux" 1687730424 1048 67a12e42aea8a217eb78b57181b1bda0 "pdflatex"
-  "texto.tex" 1687730414 829 3bc7fd454c3cf8bf5c5d9d6775e2a763 ""
+  "texto.aux" 1688224668 1048 67a12e42aea8a217eb78b57181b1bda0 "pdflatex"
+  "texto.tex" 1688224662 2799 fe4363efa2b09ad726a28292d0993652 ""
   (generated)
   "texto.aux"
   "texto.log"
